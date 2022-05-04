@@ -112,6 +112,13 @@ aa71222c3d71   docker/getting-started                   "/docker-entrypoint.…"
 docker container stop 2be71
 docker container stop 0b6ca
 ```
+---
+## What You Will Learn during this Step 05 :
+
+
+![Browser](Images/Screenshot_07.png)
+
+---
 
 
 
