@@ -73,6 +73,25 @@ In Window 10 when using docker toolbox, docker is configured to use the default 
 ```
 
 ---
+## What You Will Learn during this Step 02 and 03:
+
+
+![Browser](Images/Screenshot_05.png)
+
+```sh
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\WINDOWS\system32> docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+```
+
+![Browser](Images/Screenshot_06.png)
+
+---
+
+
 
 
 
