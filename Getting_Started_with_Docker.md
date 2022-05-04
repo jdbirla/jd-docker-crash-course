@@ -670,4 +670,89 @@ C:\Users\user> docker container run -p 5000:5000 -d --restart=always in28min/tod
 ![Browser](Images/Screenshot_12.png)
 
 ---
+## What You Will Learn during this Step 09:
 
+```docker
+C:\Users\user>docker events
+2022-05-04T14:04:17.234091600+05:30 volume create 1ce8ace8c651da3fb5d4c486cabbf19bc2c4c65350343c12c1ed1889e59568a9 (driver=local)
+2022-05-04T14:04:17.248819700+05:30 container create b7de80246e825b5e868f9d322a34ec53a250a7644c04696649e70b855041641c (image=in28min/todo-rest-api-h2:1.0.0.RELEASE, name=gracious_curran)
+2022-05-04T14:04:17.449181900+05:30 network connect c70ef2f3584dc0307425fdd49596b47a576d308cf2ecf2f190ed82db24406b67 (container=b7de80246e825b5e868f9d322a34ec53a250a7644c04696649e70b855041641c, name=bridge, type=bridge)
+2022-05-04T14:04:17.454107300+05:30 volume mount 1ce8ace8c651da3fb5d4c486cabbf19bc2c4c65350343c12c1ed1889e59568a9 (container=b7de80246e825b5e868f9d322a34ec53a250a7644c04696649e70b855041641c, destination=/tmp, driver=local, propagation=, read/write=true)
+2022-05-04T14:04:17.926071200+05:30 container start b7de80246e825b5e868f9d322a34ec53a250a7644c04696649e70b855041641c (image=in28min/todo-rest-api-h2:1.0.0.RELEASE, name=gracious_curran)
+
+C:\Users\user>docker top
+"docker top" requires at least 1 argument.
+See 'docker top --help'.
+
+Usage:  docker top CONTAINER [ps OPTIONS]
+
+Display the running processes of a container
+
+C:\Users\user>docker container ls
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED         STATUS         PORTS                    NAMES
+b7de80246e82   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   2 minutes ago   Up 2 minutes   0.0.0.0:5000->5000/tcp   gracious_curran
+aa71222c3d71   docker/getting-started                   "/docker-entrypoint.…"   3 hours ago     Up 3 hours     0.0.0.0:80->80/tcp       practical_shirley
+
+C:\Users\user>docker container top b7de
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                2484                2463                39                  08:34               ?                   00:00:57            java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+
+C:\Users\user>docker stats
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.29%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.10%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.10%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.36%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.36%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.36%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.19%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.19%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.12%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.12%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.11%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.11%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.10%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O          BLOCK I/O   PIDS
+b7de80246e82   gracious_curran     0.10%     463.8MiB / 5.892GiB   7.69%     866B / 0B        0B / 0B     33
+aa71222c3d71   practical_shirley   0.00%     3.965MiB / 5.892GiB   0.07%     17.9kB / 586kB   0B / 0B     5
+
+
+C:\Users\user>docker container run -p 5001:5000 -m 512m --cpu-quota 5000 -d --restart=always in28min/todo-rest-api-h2:1.0.0.RELEASE
+f2f6dd7c1edb96fc140afbece074809b65b1ab0fa175fcf829920589a73428f7
+
+C:\Users\user>docker system df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          2         2         171.7MB   0B (0%)
+Containers      3         2         1.095kB   0B (0%)
+Local Volumes   8         2         32.77kB   0B (0%)
+Build Cache     0         0         0B        0B
+
+C:\Users\user>
+
+```
+---
