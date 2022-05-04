@@ -90,8 +90,28 @@ PS C:\WINDOWS\system32> docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0.R
 ![Browser](Images/Screenshot_06.png)
 
 ---
+## What You Will Learn during this Step 04 :
 
+```
+docker run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker logs 0b6cacbaeac6f0b01549d55dd51154824cac0dcf3782dbd3fdb38e9d1964f38b
+docker logs -f 0b6cacbaeac6f0b01549d55dd51154824cac0dcf3782dbd3fdb38e9d1964f38b
+docker container ls
+docker run -p 5001:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+docker images
+docker container ls -a
+C:\Users\user>docker container ls -a
 
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED          STATUS                        PORTS                    NAMES
+2be719460eb4   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   2 minutes ago    Up 2 minutes                  0.0.0.0:5001->5000/tcp   nifty_curran
+0b6cacbaeac6   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   8 minutes ago    Up 8 minutes                  0.0.0.0:5000->5000/tcp   infallible_robinson
+e79687de64c2   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   12 minutes ago   Exited (143) 8 minutes ago                             determined_chaplygin
+721919b9bd47   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   53 minutes ago   Exited (143) 12 minutes ago                            epic_wright
+aa71222c3d71   docker/getting-started                   "/docker-entrypoint.…"   2 hours ago      Up 2 hours                    0.0.0.0:80->80/tcp       practical_shirley
+
+docker container stop 2be71
+docker container stop 0b6ca
+```
 
 
 
