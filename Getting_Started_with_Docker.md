@@ -119,7 +119,14 @@ docker container stop 0b6ca
 ![Browser](Images/Screenshot_07.png)
 
 ---
+## What You Will Learn during this Step 06 :
 
+
+![Browser](Images/Screenshot_08.png)
+
+![Browser](Images/Screenshot_09.png)
+
+---
 
 
 
