@@ -127,8 +127,247 @@ docker container stop 0b6ca
 ![Browser](Images/Screenshot_09.png)
 
 ---
+## What You Will Learn during this Step 07:
 
+```docker
+C:\Users\user>docker images
 
+REPOSITORY                 TAG             IMAGE ID       CREATED       SIZE
+docker/getting-started     latest          cb90f98fd791   3 weeks ago   28.8MB
+in28min/todo-rest-api-h2   1.0.0.RELEASE   f8049a029560   2 years ago   143MB
 
+C:\Users\user>docker tag in28min/todo-rest-api-h2:1.0.0.RELEASE in28min/todo-rest-api-h2:latest
+
+C:\Users\user>docker images
+REPOSITORY                 TAG             IMAGE ID       CREATED       SIZE
+docker/getting-started     latest          cb90f98fd791   3 weeks ago   28.8MB
+in28min/todo-rest-api-h2   1.0.0.RELEASE   f8049a029560   2 years ago   143MB
+in28min/todo-rest-api-h2   latest          f8049a029560   2 years ago   143MB
+
+C:\Users\user>docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+4be315f6562f: Pull complete
+96e2eb237a1b: Pull complete
+8aa3ac85066b: Pull complete
+ac7e524f6c89: Pull complete
+f6a88631064f: Pull complete
+15bb3ec3ff50: Pull complete
+ae65dc337dcb: Pull complete
+573c3c7fa18d: Pull complete
+9d10771b98b8: Pull complete
+3d8ef442614b: Pull complete
+7dc17a6cea26: Pull complete
+752752efdaea: Pull complete
+Digest: sha256:2dafe3f044f140ec6c07716d34f0b317b98f8e251435abd347951699f7aa3904
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+
+C:\Users\user>docker images
+REPOSITORY                 TAG             IMAGE ID       CREATED       SIZE
+mysql                      latest          96d0eae5ed60   6 days ago    524MB
+docker/getting-started     latest          cb90f98fd791   3 weeks ago   28.8MB
+in28min/todo-rest-api-h2   1.0.0.RELEASE   f8049a029560   2 years ago   143MB
+in28min/todo-rest-api-h2   latest          f8049a029560   2 years ago   143MB
+
+C:\Users\user>docker search mysql
+NAME                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+mysql                            MySQL is a widely used, open-source relation…   12510     [OK]
+mariadb                          MariaDB Server is a high performing open sou…   4813      [OK]
+mysql/mysql-server               Optimized MySQL Server Docker images. Create…   925                  [OK]
+percona                          Percona Server is a fork of the MySQL relati…   575       [OK]
+phpmyadmin                       phpMyAdmin - A web interface for MySQL and M…   522       [OK]
+centos/mysql-57-centos7          MySQL 5.7 SQL database server                   93
+mysql/mysql-cluster              Experimental MySQL Cluster Docker images. Cr…   93
+bitnami/mysql                    Bitnami MySQL Docker Image                      70                   [OK]
+ubuntu/mysql                     MySQL open source fast, stable, multi-thread…   31
+circleci/mysql                   MySQL is a widely used, open-source relation…   25
+mysql/mysql-router               MySQL Router provides transparent routing be…   24
+google/mysql                     MySQL server for Google Compute Engine          21                   [OK]
+vmware/harbor-db                 Mysql container for Harbor                      10
+mysqlboy/docker-mydumper         docker-mydumper containerizes MySQL logical …   3
+mysqlboy/mydumper                mydumper for mysql logcial backups              3
+bitnami/mysqld-exporter                                                          3
+ibmcom/mysql-s390x               Docker image for mysql-s390x                    2
+newrelic/mysql-plugin            New Relic Plugin for monitoring MySQL databa…   1                    [OK]
+mirantis/mysql                                                                   0
+mysql/mysql-operator             MySQL Operator for Kubernetes                   0
+ibmcom/tidb-ppc64le              TiDB is a distributed NewSQL database compat…   0
+newrelic/k8s-nri-mysql           New Relic Infrastructure MySQL Integration (…   0
+mysqlboy/elasticsearch                                                           0
+cimg/mysql                                                                       0
+mysqleatmydata/mysql-eatmydata                                                   0
+
+C:\Users\user>docker image history 96d0eae5ed60
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+96d0eae5ed60   6 days ago    /bin/sh -c #(nop)  CMD ["mysqld"]               0B
+<missing>      6 days ago    /bin/sh -c #(nop)  EXPOSE 3306 33060            0B
+<missing>      6 days ago    /bin/sh -c #(nop)  ENTRYPOINT ["docker-entry…   0B
+<missing>      6 days ago    /bin/sh -c ln -s usr/local/bin/docker-entryp…   34B
+<missing>      6 days ago    /bin/sh -c #(nop) COPY file:e9a583a365264f0f…   13.5kB
+<missing>      6 days ago    /bin/sh -c #(nop) COPY dir:2e040acc386ebd23b…   1.12kB
+<missing>      6 days ago    /bin/sh -c #(nop)  VOLUME [/var/lib/mysql]      0B
+<missing>      6 days ago    /bin/sh -c {   echo mysql-community-server m…   387MB
+<missing>      6 days ago    /bin/sh -c echo 'deb [ signed-by=/etc/apt/ke…   97B
+<missing>      6 days ago    /bin/sh -c #(nop)  ENV MYSQL_VERSION=8.0.29-…   0B
+<missing>      13 days ago   /bin/sh -c #(nop)  ENV MYSQL_MAJOR=8.0          0B
+<missing>      13 days ago   /bin/sh -c set -eux;  key='859BE8D7C586F5384…   2.29kB
+<missing>      13 days ago   /bin/sh -c set -eux;  apt-get update;  apt-g…   53.6MB
+<missing>      13 days ago   /bin/sh -c mkdir /docker-entrypoint-initdb.d    0B
+<missing>      13 days ago   /bin/sh -c set -eux;  savedAptMark="$(apt-ma…   4.06MB
+<missing>      13 days ago   /bin/sh -c #(nop)  ENV GOSU_VERSION=1.14        0B
+<missing>      13 days ago   /bin/sh -c apt-get update && apt-get install…   9.34MB
+<missing>      13 days ago   /bin/sh -c groupadd -r mysql && useradd -r -…   329kB
+<missing>      2 weeks ago   /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>      2 weeks ago   /bin/sh -c #(nop) ADD file:011a43ee23214c201…   69.3MB
+
+C:\Users\user>docker image inspect f8049a029560
+[
+    {
+        "Id": "sha256:f8049a029560296f2c8d98a9668672ed9db1fc85ec0054f9fd9956ae79bf8827",
+        "RepoTags": [
+            "in28min/todo-rest-api-h2:1.0.0.RELEASE",
+            "in28min/todo-rest-api-h2:latest"
+        ],
+        "RepoDigests": [
+            "in28min/todo-rest-api-h2@sha256:903c333e39cf8156628ad7b4305bb78bfa6925828e6a3d0b7bc8416d455dc8e0"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2019-07-05T05:48:14.830997949Z",
+        "Container": "0e423c57bf4ac2f9d8c9debea6113ee79e916c15e2401171d1bf678060919e9b",
+        "ContainerConfig": {
+            "Hostname": "0e423c57bf4a",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin",
+                "LANG=C.UTF-8",
+                "JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk",
+                "JAVA_VERSION=8u212",
+                "JAVA_ALPINE_VERSION=8.212.04-r0",
+                "JAVA_OPTS="
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "ENTRYPOINT [\"sh\" \"-c\" \"java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar\"]"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:82616270b25bfc67e0804644d7c221f21582ffc7aeb9887ccdd40e4413252ced",
+            "Volumes": {
+                "/tmp": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "sh",
+                "-c",
+                "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "DockerVersion": "18.09.1",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin",
+                "LANG=C.UTF-8",
+                "JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk",
+                "JAVA_VERSION=8u212",
+                "JAVA_ALPINE_VERSION=8.212.04-r0",
+                "JAVA_OPTS="
+            ],
+            "Cmd": null,
+            "ArgsEscaped": true,
+            "Image": "sha256:82616270b25bfc67e0804644d7c221f21582ffc7aeb9887ccdd40e4413252ced",
+            "Volumes": {
+                "/tmp": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "sh",
+                "-c",
+                "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 142956365,
+        "VirtualSize": 142956365,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/53f73574ac731c09aba5bc73bfb6e655492b55c5361223a68265276b1eaebcaa/diff:/var/lib/docker/overlay2/46c81ff5097deabec0ec4ede0a63bbd1b1babb30ca2b7e7900317d09a07d9299/diff:/var/lib/docker/overlay2/68d2a152aee930211be57e1543ccfd84f727b51b9729dbdfd6d652165ba9538f/diff",
+                "MergedDir": "/var/lib/docker/overlay2/8f7d5c666e9d0c65894090de491d30951174beabccf401883a76405ec6f90e71/merged",
+                "UpperDir": "/var/lib/docker/overlay2/8f7d5c666e9d0c65894090de491d30951174beabccf401883a76405ec6f90e71/diff",
+                "WorkDir": "/var/lib/docker/overlay2/8f7d5c666e9d0c65894090de491d30951174beabccf401883a76405ec6f90e71/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:f1b5933fe4b5f49bbe8258745cf396afe07e625bdab3168e364daf7c956b6b81",
+                "sha256:9b9b7f3d56a01e3d9076874990c62e7a516cc4032f784f421574d06b18ef9aa4",
+                "sha256:ceaf9e1ebef5f9eaa707a838848a3c13800fcf32d7757be10d4b08fb85f1bc8a",
+                "sha256:7105f77ebf51826efa553db260582220c794080ad3d98bb281224f82390d27fe"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2022-05-04T07:58:38.924822Z"
+        }
+    }
+]
+
+C:\Users\user>docker image remove 96d0eae5ed60
+Untagged: mysql:latest
+Untagged: mysql@sha256:2dafe3f044f140ec6c07716d34f0b317b98f8e251435abd347951699f7aa3904
+Deleted: sha256:96d0eae5ed6069320a16ec1029b7378e330c31473bb7ba3027578c7c582c0076
+Deleted: sha256:8b3106bcf588d8eb5b468b421e9de2559d51bfb4314c084a4e8d26a88ac0f28b
+Deleted: sha256:a3d5651d373109abedaedd2a84bbdcdfc2efd18fc5ddc977365abfb11613dba5
+Deleted: sha256:9eb4060a534852a3f9958111349521c81660d385bafbe88cd41acc5843c088ad
+Deleted: sha256:064eedb664a6ec1774dd7b8e1e2d0696136b2d17004544d78888aa3db273ea23
+Deleted: sha256:56def78a8b700366329f8fd6e5199c2d459f370630f0a6c537e54fa279dd8cee
+Deleted: sha256:625e297c59e84d9cb5ae0dcd69714dcc7f3c823c281cce1616374232057c8fa9
+Deleted: sha256:52994d077831159b79c473125916eb6874cebf38493e3046abe80935e181d8af
+Deleted: sha256:9550bb960b1438abbdc93a0a5518055f4a455bbd65491e53fa795960ddf518a5
+Deleted: sha256:d3dee54c8b55b10f9fe4100dd1fa6e59f98dbfbf84b5757f518d874f57acd1ec
+Deleted: sha256:49ff85d13492ccda474015e5e7101f35e8cee2f4b23d2385195d8a897b4be097
+Deleted: sha256:7310671d54d99fba70b7191bca28f8e9a4b5438c4b012a2ceca11cae17d3177b
+Deleted: sha256:0ad3ddf4a4ce0fc9d65021897541c99e5497a11ced2419016147267df61732d3
+
+C:\Users\user>docker images
+REPOSITORY                 TAG             IMAGE ID       CREATED       SIZE
+docker/getting-started     latest          cb90f98fd791   3 weeks ago   28.8MB
+in28min/todo-rest-api-h2   1.0.0.RELEASE   f8049a029560   2 years ago   143MB
+in28min/todo-rest-api-h2   latest          f8049a029560   2 years ago   143MB
+
+C:\Users\user>
+```
+---
 
 
