@@ -30,5 +30,5 @@ target
 hs_err_pid*
 
 #workspace folder
-spring_microservices_workspace/
+docker_workspace/
 local-git-localconfig-repo/
