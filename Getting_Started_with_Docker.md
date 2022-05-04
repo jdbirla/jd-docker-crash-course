@@ -369,5 +369,305 @@ in28min/todo-rest-api-h2   latest          f8049a029560   2 years ago   143MB
 C:\Users\user>
 ```
 ---
+## What You Will Learn during this Step 08:
 
+```docker
+C:\Users\user>docker container run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df
+
+C:\Users\user>docker container pause 6c129
+6c129
+
+C:\Users\user>docker logs -f 6c129
+C:\Users\user>docker container unpause 6c129
+6c129
+
+C:\Users\user>docker container inspect 6c129
+
+C:\Users\user>docker container inspect 6c129
+[
+    {
+        "Id": "6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df",
+        "Created": "2022-05-04T08:13:14.2551396Z",
+        "Path": "sh",
+        "Args": [
+            "-c",
+            "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 2332,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2022-05-04T08:13:15.048048Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:f8049a029560296f2c8d98a9668672ed9db1fc85ec0054f9fd9956ae79bf8827",
+        "ResolvConfPath": "/var/lib/docker/containers/6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df/hostname",
+        "HostsPath": "/var/lib/docker/containers/6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df/hosts",
+        "LogPath": "/var/lib/docker/containers/6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df/6c129dc16a1c6ccdc8c65de831efee8da3c9723605698d8b51435905b75e80df-json.log",
+        "Name": "/objective_lumiere",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "5000/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "5000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                30,
+                120
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/3c3297654ddf75a1f2ca5771dd4b7f4a89d86aafebeda7dc3b6c0ec540b04a19-init/diff:/var/lib/docker/overlay2/8f7d5c666e9d0c65894090de491d30951174beabccf401883a76405ec6f90e71/diff:/var/lib/docker/overlay2/53f73574ac731c09aba5bc73bfb6e655492b55c5361223a68265276b1eaebcaa/diff:/var/lib/docker/overlay2/46c81ff5097deabec0ec4ede0a63bbd1b1babb30ca2b7e7900317d09a07d9299/diff:/var/lib/docker/overlay2/68d2a152aee930211be57e1543ccfd84f727b51b9729dbdfd6d652165ba9538f/diff",
+                "MergedDir": "/var/lib/docker/overlay2/3c3297654ddf75a1f2ca5771dd4b7f4a89d86aafebeda7dc3b6c0ec540b04a19/merged",
+                "UpperDir": "/var/lib/docker/overlay2/3c3297654ddf75a1f2ca5771dd4b7f4a89d86aafebeda7dc3b6c0ec540b04a19/diff",
+                "WorkDir": "/var/lib/docker/overlay2/3c3297654ddf75a1f2ca5771dd4b7f4a89d86aafebeda7dc3b6c0ec540b04a19/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "f82f2e16bfa7dc60111b8e3de206e961be6c664e306ca2620358f6bada48d3af",
+                "Source": "/var/lib/docker/volumes/f82f2e16bfa7dc60111b8e3de206e961be6c664e306ca2620358f6bada48d3af/_data",
+                "Destination": "/tmp",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "6c129dc16a1c",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin",
+                "LANG=C.UTF-8",
+                "JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk",
+                "JAVA_VERSION=8u212",
+                "JAVA_ALPINE_VERSION=8.212.04-r0",
+                "JAVA_OPTS="
+            ],
+            "Cmd": null,
+            "Image": "in28min/todo-rest-api-h2:1.0.0.RELEASE",
+            "Volumes": {
+                "/tmp": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "sh",
+                "-c",
+                "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "80f3c7f124cd709ecce6481fc0aee80d8906a5a14d3a9f5bfd9d465180de9ec5",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "5000/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "5000"
+                    }
+                ]
+            },
+            "SandboxKey": "/var/run/docker/netns/80f3c7f124cd",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "c6f5dd93053ce3bfff9c8c915c5f2095e9746093374f9703f276b9ef9128b9e2",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.3",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:03",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "c70ef2f3584dc0307425fdd49596b47a576d308cf2ecf2f190ed82db24406b67",
+                    "EndpointID": "c6f5dd93053ce3bfff9c8c915c5f2095e9746093374f9703f276b9ef9128b9e2",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:03",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
+C:\Users\user>docker container ls -a
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED          STATUS                        PORTS                    NAMES
+6c129dc16a1c   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   6 minutes ago    Up 6 minutes                  0.0.0.0:5000->5000/tcp   objective_lumiere
+2be719460eb4   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   39 minutes ago   Exited (143) 36 minutes ago                            nifty_curran
+0b6cacbaeac6   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   45 minutes ago   Exited (143) 35 minutes ago                            infallible_robinson
+e79687de64c2   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   49 minutes ago   Exited (143) 46 minutes ago                            determined_chaplygin
+721919b9bd47   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   2 hours ago      Exited (143) 50 minutes ago                            epic_wright
+aa71222c3d71   docker/getting-started                   "/docker-entrypoint.…"   2 hours ago      Up 2 hours                    0.0.0.0:80->80/tcp       practical_shirley
+
+C:\Users\user>docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+2be719460eb41550b975903c661cdcb2011aae59b4164c86a1cf1def32c94855
+0b6cacbaeac6f0b01549d55dd51154824cac0dcf3782dbd3fdb38e9d1964f38b
+e79687de64c27547c5d3ee44ffd5718d0ede27f069f70a81ed1ef3fe2e350a9e
+721919b9bd47254aad500661efb6f613f29c5f00473be5560c36e24ecdba72e9
+
+Total reclaimed space: 0B
+
+C:\Users\user>docker container ls -a
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED         STATUS         PORTS                    NAMES
+6c129dc16a1c   in28min/todo-rest-api-h2:1.0.0.RELEASE   "sh -c 'java $JAVA_O…"   7 minutes ago   Up 7 minutes   0.0.0.0:5000->5000/tcp   objective_lumiere
+aa71222c3d71   docker/getting-started                   "/docker-entrypoint.…"   2 hours ago     Up 2 hours     0.0.0.0:80->80/tcp       practical_shirley
+
+C:\Users\user>docker container stop 6c129
+C:\Users\user>docker container kill 6c129
+
+C:\Users\user> docker container run -p 5000:5000 -d --restart=always in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+```
+
+
+* Output
+
+* docker container pause 6c129
+
+![Browser](Images/Screenshot_10.png)
+
+* docker container unpause 6c129
+
+![Browser](Images/Screenshot_11.png)
+
+* docker container stop 6c129 && docker container kill 6c129
+
+![Browser](Images/Screenshot_12.png)
+
+---
 
