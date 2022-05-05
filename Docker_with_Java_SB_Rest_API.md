@@ -356,7 +356,7 @@ ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
 
 * /01-hello-world-rest-api/pom.xml
 
-```
+```pom.xml
 	<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
