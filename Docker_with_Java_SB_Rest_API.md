@@ -122,5 +122,79 @@ PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-m
 ![Browser](Images/Screenshot_16.png)
 
 ---
+## What You Will Learn during this Step 03:
+- Use Dockerfile to Build Docker Image
+
+* /01-hello-world-rest-api/Dockerfile
+```docker
+FROM openjdk:8-jdk-alpine
+ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
+ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
+
+```
+
+### Basic
+```
+FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
+ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
+```
+
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ docker build -t jitubirla/hello-world-rest-api:dockerfile1 .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:a2052a722120d8a7d852f93147cf2eb1260e6e3a8ca08ff2309ed6224d14068b
+#1 transferring dockerfile: 192B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:6e4783f5eb5fa0ac581d3aacfabb0fb3582e1918c4219be8efa0fa6530035ca3
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/openjdk:8-jdk-alpine
+#3 sha256:d758512ecc4a4d978b274098688e884e061155d4c36c119bf2fd83b966ae4841
+#3 DONE 0.0s
+
+#5 [internal] load build context
+#5 sha256:d2bcd9b991aa690d992f4263ea6223c06deaf7fdd8eadd3d68b444cc8eff45a0
+#5 ...
+
+#4 [1/2] FROM docker.io/library/openjdk:8-jdk-alpine
+#4 sha256:d680c6a82813d080081fbc3c024d21ddfa7ff995981cc7b4bfafe55edf80a319
+#4 DONE 0.3s
+
+#5 [internal] load build context
+#5 sha256:d2bcd9b991aa690d992f4263ea6223c06deaf7fdd8eadd3d68b444cc8eff45a0
+#5 transferring context: 16.81MB 0.6s done
+#5 DONE 0.6s
+
+#6 [2/2] ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
+#6 sha256:df7aadd5b2477e4353b0629efdd6a4b0ab9c660e18e6d8afec3de68729f36021
+#6 DONE 0.1s
+
+#7 exporting to image
+#7 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#7 exporting layers 0.1s done
+#7 writing image sha256:cc3fbea13df615feb1098df4f88755c22db18c63435ade75bd8508896ebc3a53 done
+#7 naming to docker.io/jitubirla/hello-world-rest-api:dockerfile1 done
+#7 DONE 0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ docker container ls
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED             STATUS             PORTS                    NAMES
+8a85460595dc   jitubirla/hello-world-rest-api:manual3   "java -jar /tmp/hell…"   51 minutes ago      Up 51 minutes      0.0.0.0:8080->8080/tcp   peaceful_grothendieck
+65f59657988a   openjdk:8-jdk-alpine                     "/bin/sh"                About an hour ago   Up About an hour                            keen_shannon
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ docker run -p 8080:8080 jitubirla/hello-world-rest-api:dockerfile1
+```
 
 
+---
+## What You Will Learn during this Step 04:
+- Understanding Docker Image Layers, Caching and Dockerfile Instructions
