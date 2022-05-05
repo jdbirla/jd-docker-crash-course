@@ -6,6 +6,20 @@
 ## What You Will Learn during this Step 02:
 - Build Docker Image Manually for 01 Hello World Rest API
 
+
+### Docker Commands - Creating Image Manually
+
+- docker run -dit openjdk:8-jdk-alpine
+- docker container exec naughty_knuth ls /tmp
+- docker container cp target/hello-world-rest-api.jar naughty_knuth:/tmp
+- docker container exec naughty_knuth ls /tmp
+- docker container commit naughty_knuth in28min/hello-world-rest-api:manual1
+- docker run in28min/hello-world-rest-api:manual1
+- docker container ls
+- docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' naughty_knuth in28min/hello-world-rest-api:manual2
+- docker run -p 8080:8080 in28min/hello-world-rest-api:manual2
+
+
 ### Building an Image
 
 1. Build a Jar - /target/hello-world-rest-api.jar
