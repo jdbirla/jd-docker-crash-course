@@ -509,4 +509,100 @@ user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-co
 
 ```
 ---
+## What You Will Learn during this Step 08:
+
+- Using JIB Plugin to Create Docker Images
+- delete Docerfile (this file is not required in case if we are using JIB plugin)
+- JIB is only for Java project if we are working on any other langauge then we have to use Docerfile
+
+### JIB
+
+- https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#quickstart
+
+- https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md
+
+#### "useCurrentTimestamp - true" discussion
+- https://github.com/GooleContainerTools/jib/blob/master/docs/faq.md#why-is-my-image-created-48-years-ago 
+- https://github.com/GoogleContainerTools/jib/issues/413 
+
+
+
+```xml
+<plugin>
+	<groupId>com.google.cloud.tools</groupId>
+	<artifactId>jib-maven-plugin</artifactId>
+	<version>1.6.1</version>
+	<configuration>
+		<container>
+			<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+		</container>
+	</configuration>
+	<executions>
+		<execution>
+			<phase>package</phase>
+			<goals>
+				<goal>dockerBuild</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+```
+```xml
+<configuration>
+	<from>
+		<image>openjdk:alpine</image>
+	</from>
+	<to>
+		<image>in28min/${project.name}</image>
+		<tags>
+			<tag>${project.version}</tag>
+			<tag>latest</tag>
+		</tags>
+	</to>
+	<container>
+		<jvmFlags>
+			<jvmFlag>-Xms512m</jvmFlag>
+		</jvmFlags>
+		<mainClass>com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication</mainClass>
+		<ports>
+			<port>8100</port>
+		</ports>
+	</container>
+</configuration>
+```
+* /01-hello-world-rest-api/pom.xml
+
+```xml
+<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>1.6.1</version>
+				<configuration>
+					<container>
+						<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+					</container>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>dockerBuild</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <id>unpack</id> <phase>package</phase> <goals> <goal>unpack</goal> 
+				</goals> <configuration> <artifactItems> <artifactItem> <groupId>${project.groupId}</groupId> 
+				<artifactId>${project.artifactId}</artifactId> <version>${project.version}</version> 
+				</artifactItem> </artifactItems> </configuration> </execution> </executions> 
+				</plugin> -->
+
+			<!-- <plugin> <groupId>com.spotify</groupId> <artifactId>dockerfile-maven-plugin</artifactId> 
+				<version>1.4.10</version> <executions> <execution> <id>default</id> <goals> 
+				<goal>build</goal> </goals> </execution> </executions> <configuration> <repository>jitubirla/${project.name}</repository> 
+				<tag>${project.version}</tag> <skipDockerInfo>true</skipDockerInfo> </configuration> 
+				</plugin> -->
+```
+---
 
