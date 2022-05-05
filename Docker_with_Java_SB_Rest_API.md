@@ -350,3 +350,144 @@ ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
 ```
 
 ---
+## What You Will Learn during this Step 07:
+
+- Improving Caching of Docker Images by Adding Libraries in a Separate Step
+
+* /01-hello-world-rest-api/pom.xml
+
+```
+<plugin>	
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-dependency-plugin</artifactId>
+	<executions>
+		<execution>
+			<id>unpack</id>
+			<phase>package</phase>
+			<goals>
+				<goal>unpack</goal>
+			</goals>
+			<configuration>
+				<artifactItems>
+					<artifactItem>
+						<groupId>${project.groupId}</groupId>
+						<artifactId>${project.artifactId}</artifactId>
+						<version>${project.version}</version>
+					</artifactItem>
+				</artifactItems>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+```
+
+### Level 2
+
+```
+FROM openjdk:8-jdk-alpine
+ARG DEPENDENCY=target/dependency
+COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY ${DEPENDENCY}/META-INF /app/META-INF
+COPY ${DEPENDENCY}/BOOT-INF/classes /app
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication"]
+```
+
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ mvn clean package -DskipTests
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------< com.in28minutes.rest.webservices:01-hello-world-rest-api >------
+[INFO] Building hello-world-rest-api 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ 01-hello-world-rest-api ---
+[INFO] Deleting C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ 01-hello-world-rest-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 0 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ 01-hello-world-rest-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ 01-hello-world-rest-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\src\test\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ 01-hello-world-rest-api ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ 01-hello-world-rest-api ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.1:jar (default-jar) @ 01-hello-world-rest-api ---
+[INFO] Building jar: C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target\hello-world-rest-api.jar
+[INFO]
+[INFO] --- spring-boot-maven-plugin:2.1.7.RELEASE:repackage (repackage) @ 01-hello-world-rest-api ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO]
+[INFO] --- maven-dependency-plugin:3.1.1:unpack (unpack) @ 01-hello-world-rest-api ---
+[INFO] Configured Artifact: com.in28minutes.rest.webservices:01-hello-world-rest-api:0.0.1-SNAPSHOT:jar
+[INFO] Unpacking C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target\hello-world-rest-api.jar to C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target\dependency with includes "" and excludes ""
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.773 s
+[INFO] Finished at: 2022-05-05T12:14:32+05:30
+[INFO] ------------------------------------------------------------------------
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ docker build -t jitubirla/hello-world-rest-api:dockerfile1 .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:60e536e9be0924239509254814cdfd0fb94b13f251b6c37bbcadd9af19b7c3d4
+#1 transferring dockerfile: 32B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:9f7ab7badef57d674697c9b9f525552d173f63d7ec7779e37205e0c438fcd4d3
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/openjdk:8-jdk-alpine
+#3 sha256:d758512ecc4a4d978b274098688e884e061155d4c36c119bf2fd83b966ae4841
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/openjdk:8-jdk-alpine
+#4 sha256:d680c6a82813d080081fbc3c024d21ddfa7ff995981cc7b4bfafe55edf80a319
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 sha256:688c2e42100cba66ac9b299bf7fb22041b481cf455b06f7414e1e589b454d72a
+#5 transferring context: 12.65kB 0.1s done
+#5 DONE 0.1s
+
+#6 [2/4] COPY target/dependency/BOOT-INF/lib /app/lib
+#6 sha256:ef509c4fead1682873c8622bafccf62532ac8664faf561785552a22ad7178fc4
+#6 CACHED
+
+#7 [3/4] COPY target/dependency/META-INF /app/META-INF
+#7 sha256:b5a15357cb31093f74372749565c02c9d9d4dd21606727aaded8194670e7ac31
+#7 DONE 0.1s
+
+#8 [4/4] COPY target/dependency/BOOT-INF/classes /app
+#8 sha256:9a0defac4bc0c8f07ce6e5500e6d6ad8707125eaf640162748d3175eea9dbe9b
+#8 DONE 0.2s
+
+#9 exporting to image
+#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#9 exporting layers 0.1s done
+#9 writing image sha256:a9140d3fbe0b210c8ef41fc6837f90143bd1a89675aa91253f78eeef66ac3b77 done
+#9 naming to docker.io/jitubirla/hello-world-rest-api:dockerfile1 done
+#9 DONE 0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+
+```
+---
+
