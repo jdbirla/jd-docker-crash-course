@@ -199,6 +199,8 @@ $ docker run -p 8080:8080 jitubirla/hello-world-rest-api:dockerfile1
 ## What You Will Learn during this Step 04:
 - Understanding Docker Image Layers, Caching and Dockerfile Instructions
 
+* /01-hello-world-rest-api/Dockerfile
+
 ```docker
 FROM openjdk:8-jdk-alpine
 EXPOSE 8080
@@ -333,4 +335,18 @@ $
 user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
 $ docker container run -p 8080:8080 jitubirla/hello-world-rest-api:0.0.1-SNAPSHOT
 ```
+---
+## What You Will Learn during this Step 06:
+
+- Create a generic reusable Dockerfile
+
+* /01-hello-world-rest-api/Dockerfile
+
+```docker
+FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+ADD target/*.jar app.jar
+ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
+```
+
 ---
