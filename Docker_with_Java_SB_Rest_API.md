@@ -605,4 +605,90 @@ user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-co
 				</plugin> -->
 ```
 ---
+## What You Will Learn during this Step 09:
 
+- Using Fabric8 Docker Maven Plugin to Create Docker Images
+
+
+
+### fabric8io/docker-maven-plugin
+
+- https://dmp.fabric8.io/
+- Remove Spotify Maven and JIB Plugins. Add the plugin shown below and configure property for jar file.
+
+Supports 
+ - Dockerfile
+ - Defining Dockerfile contents in POM XML. 
+ 
+ #### Using Dockerfile
+
+```
+<!-- To build the image - "mvn clean package" -->
+<!-- Successfully tagged webservices/01-hello-world-rest-api -->
+<!-- docker run -p 8080:8080 webservices/01-hello-world-rest-api -->
+<plugin>
+	<groupId>io.fabric8</groupId>
+	<artifactId>docker-maven-plugin</artifactId>
+	<version>0.26.0</version>
+	<executions>
+		<execution>
+			<id>docker-build</id>
+			<phase>package</phase>
+			<goals>
+				<goal>build</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+```
+
+```
+<properties>
+...
+ <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
+</properties>
+```
+
+#### Using XML Configuration
+
+```
+<!-- To build the image - "mvn clean package" -->
+<!-- TAG - 01-hello-world-rest-api:latest -->
+<!-- docker run -p 8080:8080 01-hello-world-rest-api:latest -->
+<plugin>
+   <groupId>io.fabric8</groupId>
+   <artifactId>docker-maven-plugin</artifactId>
+   <version>0.26.0</version>
+   <extensions>true</extensions>
+   <configuration>
+      <verbose>true</verbose>
+      <images>
+         <image>
+            <name>${project.artifactId}</name>
+            <build>
+               <from>java:8-jdk-alpine</from>
+               <entryPoint>
+                  <exec>
+                     <args>java</args>
+                     <args>-jar</args>
+                     <args>/maven/${project.build.finalName}.jar</args>
+                  </exec>
+               </entryPoint>
+               <assembly>
+                  <descriptorRef>artifact</descriptorRef>
+               </assembly>
+            </build>
+         </image>
+      </images>
+   </configuration>
+   <executions>
+	<execution>
+		<id>docker-build</id>
+		<phase>package</phase>
+		<goals>
+			<goal>build</goal>
+		</goals>
+	</execution>
+   </executions>
+</plugin>
+ ```
