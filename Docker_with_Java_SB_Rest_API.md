@@ -13,11 +13,11 @@
 - docker container exec naughty_knuth ls /tmp
 - docker container cp target/hello-world-rest-api.jar naughty_knuth:/tmp
 - docker container exec naughty_knuth ls /tmp
-- docker container commit naughty_knuth in28min/hello-world-rest-api:manual1
-- docker run in28min/hello-world-rest-api:manual1
+- docker container commit naughty_knuth jitubirla/hello-world-rest-api:manual1
+- docker run jitubirla/hello-world-rest-api:manual1
 - docker container ls
-- docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' naughty_knuth in28min/hello-world-rest-api:manual2
-- docker run -p 8080:8080 in28min/hello-world-rest-api:manual2
+- docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' naughty_knuth jitubirla/hello-world-rest-api:manual2
+- docker run -p 8080:8080 jitubirla/hello-world-rest-api:manual2
 
 
 ### Building an Image
@@ -60,8 +60,8 @@ REPOSITORY                 TAG             IMAGE ID       CREATED             SI
 hello-docker               latest          5cf1242e3281   About an hour ago   171MB
 docker/getting-started     latest          cb90f98fd791   3 weeks ago         28.8MB
 hello-world                latest          feb5d9fea6a5   7 months ago        13.3kB
-in28min/todo-rest-api-h2   1.0.0.RELEASE   f8049a029560   2 years ago         143MB
-in28min/todo-rest-api-h2   latest          f8049a029560   2 years ago         143MB
+jitubirla/todo-rest-api-h2   1.0.0.RELEASE   f8049a029560   2 years ago         143MB
+jitubirla/todo-rest-api-h2   latest          f8049a029560   2 years ago         143MB
 openjdk                    8-jdk-alpine    a3562aa0b991   2 years ago         105MB
 PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api> docker container ls
 CONTAINER ID   IMAGE                  COMMAND     CREATED         STATUS         PORTS     NAMES
@@ -89,8 +89,8 @@ jitubirla/hello-world-rest-api   manual1         8d80cb3ca349   5 seconds ago   
 hello-docker                     latest          5cf1242e3281   2 hours ago     171MB
 docker/getting-started           latest          cb90f98fd791   3 weeks ago     28.8MB
 hello-world                      latest          feb5d9fea6a5   7 months ago    13.3kB
-in28min/todo-rest-api-h2         1.0.0.RELEASE   f8049a029560   2 years ago     143MB
-in28min/todo-rest-api-h2         latest          f8049a029560   2 years ago     143MB
+jitubirla/todo-rest-api-h2         1.0.0.RELEASE   f8049a029560   2 years ago     143MB
+jitubirla/todo-rest-api-h2         latest          f8049a029560   2 years ago     143MB
 openjdk                          8-jdk-alpine    a3562aa0b991   2 years ago     105MB
 PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api>
 
@@ -110,8 +110,8 @@ jitubirla/hello-world-rest-api   manual1         8d80cb3ca349   6 minutes ago   
 hello-docker                     latest          5cf1242e3281   2 hours ago      171MB
 docker/getting-started           latest          cb90f98fd791   3 weeks ago      28.8MB
 hello-world                      latest          feb5d9fea6a5   7 months ago     13.3kB
-in28min/todo-rest-api-h2         1.0.0.RELEASE   f8049a029560   2 years ago      143MB
-in28min/todo-rest-api-h2         latest          f8049a029560   2 years ago      143MB
+jitubirla/todo-rest-api-h2         1.0.0.RELEASE   f8049a029560   2 years ago      143MB
+jitubirla/todo-rest-api-h2         latest          f8049a029560   2 years ago      143MB
 openjdk                          8-jdk-alpine    a3562aa0b991   2 years ago      105MB
 
 PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api> docker run -p 8080:8080 jitubirla/hello-world-rest-api:manual2
