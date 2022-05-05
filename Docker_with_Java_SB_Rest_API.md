@@ -328,3 +328,9 @@ user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-co
 $
 
 ```
+* Run the container
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ docker container run -p 8080:8080 jitubirla/hello-world-rest-api:0.0.1-SNAPSHOT
+```
+---
