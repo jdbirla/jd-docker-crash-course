@@ -224,3 +224,107 @@ ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
 
 ## What You Will Learn during this Step 05:
 - Using Dockerfile Spotify Plugin to Create Docker Images
+
+- From Spotify
+- https://github.com/spotify/dockerfile-maven
+
+* /01-hello-world-rest-api/pom.xml
+```
+<plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>dockerfile-maven-plugin</artifactId>
+	<version>1.4.10</version>
+	<executions>
+		<execution>
+			<id>default</id>
+			<goals>
+				<goal>build</goal>
+			</goals>
+		</execution>
+	</executions>
+	<configuration>
+		<repository>in28min/${project.name}</repository>
+		<tag>${project.version}</tag>
+		<skipDockerInfo>true</skipDockerInfo>
+	</configuration>
+</plugin>
+```
+
+
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$ mvn package -DskipTests
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------< com.in28minutes.rest.webservices:01-hello-world-rest-api >------
+[INFO] Building hello-world-rest-api 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ 01-hello-world-rest-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 0 resource
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ 01-hello-world-rest-api ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ 01-hello-world-rest-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\src\test\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ 01-hello-world-rest-api ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ 01-hello-world-rest-api ---
+[INFO] Tests are skipped.
+[INFO]
+[INFO] --- maven-jar-plugin:3.1.1:jar (default-jar) @ 01-hello-world-rest-api ---
+[INFO] Building jar: C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api\target\hello-world-rest-api.jar
+[INFO]
+[INFO] --- spring-boot-maven-plugin:2.1.7.RELEASE:repackage (repackage) @ 01-hello-world-rest-api ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO]
+[INFO] --- dockerfile-maven-plugin:1.4.10:build (default) @ 01-hello-world-rest-api ---
+[INFO] dockerfile: null
+[INFO] contextDirectory: C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api
+[INFO] Building Docker context C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api
+[INFO] Path(dockerfile): null
+[INFO] Path(contextDirectory): C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\01-hello-world-rest-api
+[INFO]
+[INFO] Image will be built as jitubirla/hello-world-rest-api:0.0.1-SNAPSHOT
+[INFO]
+[INFO] Step 1/4 : FROM openjdk:8-jdk-alpine
+[INFO]
+[INFO] Pulling from library/openjdk
+[INFO] Digest: sha256:94792824df2df33402f201713f932b58cb9de94a0cd524164a0f2283343547b3
+[INFO] Status: Image is up to date for openjdk:8-jdk-alpine
+[INFO]  ---> a3562aa0b991
+[INFO] Step 2/4 : EXPOSE 8080
+[INFO]
+[INFO]  ---> Running in f6f1f176b0f8
+[INFO] Removing intermediate container f6f1f176b0f8
+[INFO]  ---> 1c230e118418
+[INFO] Step 3/4 : ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
+[INFO]
+[INFO]  ---> de66c80e8fe1
+[INFO] Step 4/4 : ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
+[INFO]
+[INFO]  ---> Running in 87cacfbba36b
+[INFO] Removing intermediate container 87cacfbba36b
+[INFO]  ---> 4aba1c6d85b1
+[INFO] Successfully built 4aba1c6d85b1
+[INFO] Successfully tagged jitubirla/hello-world-rest-api:0.0.1-SNAPSHOT
+[INFO]
+[INFO] Detected build of image with id 4aba1c6d85b1
+[INFO] Successfully built jitubirla/hello-world-rest-api:0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.519 s
+[INFO] Finished at: 2022-05-05T11:37:25+05:30
+[INFO] ------------------------------------------------------------------------
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/01-hello-world-rest-api (master)
+$
+
+```
