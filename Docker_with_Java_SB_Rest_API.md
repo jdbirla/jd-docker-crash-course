@@ -198,3 +198,29 @@ $ docker run -p 8080:8080 jitubirla/hello-world-rest-api:dockerfile1
 ---
 ## What You Will Learn during this Step 04:
 - Understanding Docker Image Layers, Caching and Dockerfile Instructions
+
+```docker
+FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
+ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
+
+```
+### Quick Tip for Windows 10 : Enable "Expose Demon without TLS option"
+
+- If you are using Windows 10 and docker version : Version 2.0.0.3 (31259) or above, you would need to Enable Expose Daemon without TLS option!
+
+- Step 1: Right click on "Docker Desktop is running icon "
+
+- Step 2: Click on Settings
+
+- Step 3: In “General Tab” you must enable checkbox “Expose Daemon on tcp://localhost:2375 without TLS”
+
+-  This is the error you would see in the subsequent steps if you do not enable this - java.net.ConnectException: Connection refused: connect
+
+- More details - https://github.com/spotify/docker-maven-plugin/issues/351
+
+---
+
+## What You Will Learn during this Step 05:
+- Using Dockerfile Spotify Plugin to Create Docker Images
