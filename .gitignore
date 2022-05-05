@@ -31,5 +31,4 @@ hs_err_pid*
 
 #workspace folder
 docker_workspace/
-docker-crash-course-master/
 local-git-localconfig-repo/
