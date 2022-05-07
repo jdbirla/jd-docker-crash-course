@@ -187,6 +187,33 @@ create table todo (id integer not null, description varchar(255), is_done bit no
 
 ---
 # What You Will Learn during this Step 04:
+- Create Docker Image for 03 Todo Web Application and Use Link to connect
+
+### step 1:  run the MySQL DB 
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 mysql:5.7
+PS C:\Users\user> docker container ls
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                               NAMES
+2190f89e2f83   mysql:5.7   "docker-entrypoint.s…"   18 minutes ago   Up 18 minutes   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql
+PS C:\Users\user>
+```
+
+### step 2:  Create docker image for the application
+```
+mvn clean package
+```
+
+### step 2: Launching Web App using Docker [Using Link]
+
+```
+docker container run -p 8080:8080 --link=mysql -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+```
+
+![Browser](Images/Screenshot_23.png)
+
+![Browser](Images/Screenshot_24.png)
+
+---
 
 
 
