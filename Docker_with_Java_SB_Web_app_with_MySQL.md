@@ -277,6 +277,9 @@ $ docker inspect bridge
 
 ```
 ### In unix we can use host network as docker is directly intalled in unix os but in case of windows and mas desktop it won't work becasue in these docker runs in virtaul machine
+- https://docs.docker.com/network/host/
+
+* The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
 ```
 docker container run --network=host jbirla/todo-web-application-mysql:0.0.1-SNAPSHOT
 ```
@@ -388,3 +391,13 @@ PS C:\Users\user>
 ```
 
 ---
+# What You Will Learn during this Step 07:
+- Using Docker Volumes to Persist Data
+
+### IF we stop mysql container and start again our data will be lost for the solution of this problem we can use volume
+
+
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 --network=web-application-mysql-network --volume mysql-database-volume:/var/lib/mysql  mysql:5.7
+```
+
