@@ -69,4 +69,53 @@ We will deploy to Docker as a WAR
 
 ![Browser](Images/Screenshot_18.png)
 
+---
+## What You Will Learn during this Step 02:
 
+- Create Docker Image for Spring Boot Todo Web Application
+
+```docker
+FROM tomcat:8.0.51-jre8-alpine
+EXPOSE 8080
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+CMD ["catalina.sh","run"]
+```
+
+### Dockerfile Maven
+
+- https://github.com/spotify/dockerfile-maven
+
+```
+	<plugin>
+		<groupId>com.spotify</groupId>
+		<artifactId>dockerfile-maven-plugin</artifactId>
+		<version>1.4.10</version>
+		<executions>
+			<execution>
+				<id>default</id>
+				<goals>
+					<goal>build</goal>
+				</goals>
+			</execution>
+		</executions>
+		<configuration>
+			<repository>jbirla/${project.name}</repository>
+			<tag>${project.version}</tag>
+			<skipDockerInfo>true</skipDockerInfo>
+		</configuration>
+	</plugin>
+```
+
+```docker
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/02-todo-web-application-h2 (master)
+$ mvn clean package
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/02-todo-web-application-h2 (master)
+$ docker container run -p 8080:8080 jbirla/todo-web-application-h2:0.0.1-SNAPSHOT
+
+```
+
+---
+## What You Will Learn during this Step 03:
