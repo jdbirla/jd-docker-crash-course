@@ -12,7 +12,7 @@
 
 #### pom.xml
 
-```
+```xml
 <dependency>
 	<groupId>com.h2database</groupId>
 	<artifactId>h2</artifactId>
@@ -26,7 +26,7 @@
 
 #### src/main/resources/application.properties
 
-```
+```properties
 #spring.h2.console.enabled=true
 #spring.h2.console.settings.web-allow-others=true
 
@@ -40,7 +40,7 @@ spring.datasource.password=dummytodos
 
 #### src/test/resources/application.properties
 
-```
+```properties
 spring.jpa.hibernate.ddl-auto=create-drop
 spring.datasource.driver-class-name=org.h2.Driver
 spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
@@ -50,10 +50,11 @@ spring.datasource.password=sa
 
 #### public class Todo
 
-```
+```java
 @Size(min=10, message="Enter at least 10 Characters...")
 @Column(name="description")
 private String desc;
+```
 
 
 - Connect Spring Boot Todo Web App to MySQL on Local
@@ -185,6 +186,7 @@ create table todo (id integer not null, description varchar(255), is_done bit no
 
 
 ---
+# What You Will Learn during this Step 04:
 
 
 
