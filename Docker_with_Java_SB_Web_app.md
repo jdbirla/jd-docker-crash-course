@@ -118,4 +118,70 @@ $ docker container run -p 8080:8080 jbirla/todo-web-application-h2:0.0.1-SNAPSHO
 ```
 
 ---
-## What You Will Learn during this Step 03:
+## What You Will Learn during this Step 03 and 04:
+
+- Understanding ENTRYPOINT, CMD, COPY and ADD instructions
+- Pushing 02 Spring Boot Todo Web Application to Docker Hub
+
+### How to push a image to docker hub
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/02-todo-web-application-h2 (master)
+$ docker images
+REPOSITORY                       TAG                  IMAGE ID       CREATED             SIZE
+jbirla/todo-web-application-h2   0.0.1-SNAPSHOT       fc41b76c2bd0   16 minutes ago      149MB
+<none>                           <none>               4eed235fbd0f   29 minutes ago      149MB
+jbirla/hello-world-rest-api      0.0.1-SNAPSHOT       efc0e6c37489   53 minutes ago      122MB
+<none>                           <none>               04b0b95f0b09   About an hour ago   105MB
+01-hello-world-rest-api          0.0.1-SNAPSHOT       73dba6f8fc53   2 days ago          147MB
+jitubirla/hello-world-rest-api   dockerfile1          a9140d3fbe0b   2 days ago          122MB
+<none>                           <none>               d0eb2f0f70c4   2 days ago          122MB
+<none>                           <none>               058939030e6f   2 days ago          122MB
+jitubirla/hello-world-rest-api   0.0.1-SNAPSHOT       abe382b1793d   2 days ago          122MB
+<none>                           <none>               a02550b50868   2 days ago          122MB
+<none>                           <none>               4aba1c6d85b1   2 days ago          122MB
+<none>                           <none>               1ea7f95a9506   2 days ago          122MB
+<none>                           <none>               56b977aa7529   2 days ago          122MB
+<none>                           <none>               cc3fbea13df6   2 days ago          122MB
+jitubirla/hello-world-rest-api   manual3              d75e467d5e50   2 days ago          122MB
+hello-docker                     latest               5cf1242e3281   2 days ago          171MB
+docker/getting-started           latest               cb90f98fd791   3 weeks ago         28.8MB
+hello-world                      latest               feb5d9fea6a5   7 months ago        13.3kB
+in28min/todo-rest-api-h2         1.0.0.RELEASE        f8049a029560   2 years ago         143MB
+in28min/todo-rest-api-h2         latest               f8049a029560   2 years ago         143MB
+openjdk                          8-jdk-alpine         a3562aa0b991   2 years ago         105MB
+tomcat                           8.0.51-jre8-alpine   fcc5ace83900   4 years ago         106MB
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/02-todo-web-application-h2 (master)
+$ docker push jbirla/todo-web-application-h2:0.0.1-SNAPSHOT
+The push refers to repository [docker.io/jbirla/todo-web-application-h2]
+f5747925cdc3: Preparing
+af8842b31194: Preparing
+7ea147abc4bf: Preparing
+262192c9a09a: Preparing
+f8f564cb1419: Preparing
+638d4576a926: Preparing
+c9b26f41504c: Preparing
+cd7100a72410: Preparing
+638d4576a926: Waiting
+c9b26f41504c: Waiting
+cd7100a72410: Waiting
+7ea147abc4bf: Mounted from library/tomcat
+262192c9a09a: Mounted from library/tomcat
+f8f564cb1419: Mounted from library/tomcat
+af8842b31194: Pushed
+c9b26f41504c: Mounted from library/tomcat
+638d4576a926: Mounted from library/tomcat
+cd7100a72410: Mounted from library/tomcat
+f5747925cdc3: Pushed
+0.0.1-SNAPSHOT: digest: sha256:d38d3649572879ff9869a05bb90182a4dc3792c1fa49f67e3e8c21c2c53c892c size: 1993
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/02-todo-web-application-h2 (master)
+
+```
+
+### Docker hub [docker.io/jbirla/todo-web-application-h2]
+
+![Browser](Images/Screenshot_18.png)
+
+---
+
