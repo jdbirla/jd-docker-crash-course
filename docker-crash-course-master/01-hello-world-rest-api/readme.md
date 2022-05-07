@@ -13,16 +13,16 @@
 - docker container exec naughty_knuth ls /tmp
 - docker container cp target/hello-world-rest-api.jar naughty_knuth:/tmp
 - docker container exec naughty_knuth ls /tmp
-- docker container commit naughty_knuth in28min/hello-world-rest-api:manual1
-- docker run in28min/hello-world-rest-api:manual1
+- docker container commit naughty_knuth jbirla/hello-world-rest-api:manual1
+- docker run jbirla/hello-world-rest-api:manual1
 - docker container ls
-- docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' naughty_knuth in28min/hello-world-rest-api:manual2
-- docker run -p 8080:8080 in28min/hello-world-rest-api:manual2
+- docker container commit --change='CMD ["java","-jar","/tmp/hello-world-rest-api.jar"]' naughty_knuth jbirla/hello-world-rest-api:manual2
+- docker run -p 8080:8080 jbirla/hello-world-rest-api:manual2
 
 
 ### Running the Application
 
-Run com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication as a Java Application.
+Run com.jbirlautes.rest.webservices.restfulwebservices.RestfulWebServicesApplication as a Java Application.
 
 - http://localhost:8080/hello-world
 
@@ -36,10 +36,10 @@ Hello World
 {"message":"Hello World"}
 ```
 
-- http://localhost:8080/hello-world/path-variable/in28minutes
+- http://localhost:8080/hello-world/path-variable/jbirlautes
 
 ```json
-{"message":"Hello World, in28minutes"}
+{"message":"Hello World, jbirlautes"}
 ```
 
 ## Docker File
@@ -60,7 +60,7 @@ ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.jbirlautes.rest.webservices.restfulwebservices.RestfulWebServicesApplication"]
 ```
 
 ## Plugins
@@ -84,7 +84,7 @@ ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restf
 		</execution>
 	</executions>
 	<configuration>
-		<repository>in28min/${project.name}</repository>
+		<repository>jbirla/${project.name}</repository>
 		<tag>${project.version}</tag>
 		<skipDockerInfo>true</skipDockerInfo>
 	</configuration>
@@ -126,7 +126,7 @@ ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restf
 		<image>openjdk:alpine</image>
 	</from>
 	<to>
-		<image>in28min/${project.name}</image>
+		<image>jbirla/${project.name}</image>
 		<tags>
 			<tag>${project.version}</tag>
 			<tag>latest</tag>
@@ -136,7 +136,7 @@ ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restf
 		<jvmFlags>
 			<jvmFlag>-Xms512m</jvmFlag>
 		</jvmFlags>
-		<mainClass>com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication</mainClass>
+		<mainClass>com.jbirlautes.rest.webservices.restfulwebservices.RestfulWebServicesApplication</mainClass>
 		<ports>
 			<port>8100</port>
 		</ports>

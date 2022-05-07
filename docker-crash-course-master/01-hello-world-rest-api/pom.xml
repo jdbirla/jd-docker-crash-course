@@ -78,7 +78,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<repository>jitubirla/${project.name}</repository>
+					<repository>jbirla/${project.name}</repository>
 					<tag>${project.version}</tag>
 					<skipDockerInfo>true</skipDockerInfo>
 				</configuration>
