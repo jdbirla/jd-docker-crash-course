@@ -14,7 +14,7 @@ We will deploy to Cloud as a WAR
 
 ## Web Application
 
-- http://localhost:8080/login with in28minutes/dummy as credentials
+- http://localhost:8080/login with jbirla/dummy as credentials
 - You can add, delete and update your todos
 - Spring Security is used to secure the application
 - `com.in28minutes.springboot.web.security.SecurityConfiguration` contains the in memory security credential configuration.
