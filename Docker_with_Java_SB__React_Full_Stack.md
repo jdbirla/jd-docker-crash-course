@@ -102,3 +102,15 @@ PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-m
 ---
 ## What You Will Learn during this Step 03:
 - Containerizing Java REST API Backend
+
+
+```docker
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/restful-web-services (master)
+$ mvn clean package
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/restful-web-services (master)
+$ docker run -p 8080:8080 jbirla/rest-api-full-stack:0.0.1-SNAPSHOT
+
+
+```
