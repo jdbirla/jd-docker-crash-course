@@ -186,3 +186,124 @@ CMD ["nginx", "-g", "daemon off;"]
 C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker build .
 ```
 
+---
+## What You Will Learn during this Step 05:
+- Improve Front End Docker Build - dockerignore
+
+* .dockerignore 
+```
+node_modules
+```
+
+```
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app (master)
+$ docker build . -t jbirla/todo-front-end:0.0.1-SNAPSHOT
+#1 [internal] load build definition from Dockerfile
+#1 sha256:fde313106aa24f6f57ea3b49127d4483203e347393d7a6fd3f6e54a6a1a5bf0e
+#1 transferring dockerfile: 32B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:000877efaedfa2e013d016b310d240bd2cf1afcb7b5cb6df949241ae3aea494c
+#2 transferring context: 34B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/nginx:1.12-alpine
+#3 sha256:d1880b279652348e634e097b37eb0d02409d64dca43e99a33372d18b2a29c44c
+#3 DONE 2.3s
+
+#4 [internal] load metadata for docker.io/library/node:7.10
+#4 sha256:c64d3c0f25d9340226c8ccf379d731623a105bf6ecd89e12c005e51d8ccd18eb
+#4 DONE 2.5s
+
+#5 [stage-1 1/2] FROM docker.io/library/nginx:1.12-alpine@sha256:db5acc22920799fe387a903437eb89387607e5b3f63cf0f4472ac182d7bad644
+#5 sha256:49e41f0d92d54a5775a0755409eab218bc38ae8c95972fcb311e3d6cdf6ea5dd
+#5 DONE 0.0s
+
+#6 [frontend-build 1/6] FROM docker.io/library/node:7.10@sha256:af5c2c6ac8bc3fa372ac031ef60c45a285eeba7bce9ee9ed66dad3a01e29ab8d
+#6 sha256:4dba5db6d27a69c180c5bf0230783e152ee15070028ab569bc1f57d2da382ce8
+#6 DONE 0.0s
+
+#8 [internal] load build context
+#8 sha256:6e5f40dbad2eef0cc0dd5f886bd9b908ff3c299d76087b91062bcd85877ea538
+#8 transferring context: 2.80kB 0.0s done
+#8 DONE 0.1s
+
+#7 [frontend-build 2/6] WORKDIR /fullstack/frontend
+#7 sha256:0aa4d8906ffb186972c7e8c083a72a3f0f4565f9e2907c446eff02f1220df8a9
+#7 CACHED
+
+#10 [frontend-build 4/6] RUN npm install
+#10 sha256:f2e23746330eb12a7e978237cb783a771f5ae3539ad19e16a0b212bd626bec03
+#10 CACHED
+
+#11 [frontend-build 5/6] COPY . ./
+#11 sha256:bac3f77a9d67cea1771951cd2fe9dffb315c2229d3d758b2aca737d71eace1ee
+#11 CACHED
+
+#12 [frontend-build 6/6] RUN npm run build
+#12 sha256:5bee14f86e9f522ef6f13f2b1f4d26c69a8b52c9f37eb08123fb6a1a1036cff9
+#12 CACHED
+
+#9 [frontend-build 3/6] COPY package.json package-lock.json ./
+#9 sha256:944d1cf7ac152cc5b17ebd6c05148cefa936ee84d29f98c4a4b86e1a6e6a6c64
+#9 CACHED
+
+#13 [stage-1 2/2] COPY --from=frontend-build /fullstack/frontend/build /usr/share/nginx/html
+#13 sha256:26fbe4f018f775ac4d196d091d201bbfdbf88856ec2e9c5b72398c277abd95ad
+#13 CACHED
+
+#14 exporting to image
+#14 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#14 exporting layers done
+#14 writing image sha256:7ad8754ba69d7f544959d198f9a37e0b09afa617c735aa674150b78266c0f56e done
+#14 naming to docker.io/jbirla/todo-front-end:0.0.1-SNAPSHOT done
+#14 DONE 0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app (master)
+$ docker images
+REPOSITORY                          TAG                  IMAGE ID       CREATED          SIZE
+jbirla/todo-front-end               0.0.1-SNAPSHOT       7ad8754ba69d   2 minutes ago    16.9MB
+<none>                              <none>               7387fcbc5d73   12 minutes ago   16.8MB
+jbirla/rest-api-full-stack          0.0.1-SNAPSHOT       0f5a2a91bee7   40 minutes ago   145MB
+jbirla/todo-web-application-mysql   0.0.1-SNAPSHOT       9bbe274b7332   18 hours ago     150MB
+jbirla/todo-web-application-h2      0.0.1-SNAPSHOT       fc41b76c2bd0   19 hours ago     149MB
+<none>                              <none>               4eed235fbd0f   19 hours ago     149MB
+jbirla/hello-world-rest-api         0.0.1-SNAPSHOT       efc0e6c37489   20 hours ago     122MB
+<none>                              <none>               04b0b95f0b09   20 hours ago     105MB
+01-hello-world-rest-api             0.0.1-SNAPSHOT       73dba6f8fc53   2 days ago       147MB
+jitubirla/hello-world-rest-api      dockerfile1          a9140d3fbe0b   2 days ago       122MB
+<none>                              <none>               d0eb2f0f70c4   2 days ago       122MB
+<none>                              <none>               058939030e6f   2 days ago       122MB
+jitubirla/hello-world-rest-api      0.0.1-SNAPSHOT       abe382b1793d   2 days ago       122MB
+<none>                              <none>               a02550b50868   2 days ago       122MB
+<none>                              <none>               4aba1c6d85b1   2 days ago       122MB
+<none>                              <none>               1ea7f95a9506   2 days ago       122MB
+<none>                              <none>               cc3fbea13df6   2 days ago       122MB
+<none>                              <none>               56b977aa7529   2 days ago       122MB
+jitubirla/hello-world-rest-api      manual3              d75e467d5e50   2 days ago       122MB
+hello-docker                        latest               5cf1242e3281   3 days ago       171MB
+mysql                               5.7                  8aa4b5ffb001   10 days ago      462MB
+docker/getting-started              latest               cb90f98fd791   3 weeks ago      28.8MB
+hello-world                         latest               feb5d9fea6a5   7 months ago     13.3kB
+in28min/todo-rest-api-h2            1.0.0.RELEASE        f8049a029560   2 years ago      143MB
+in28min/todo-rest-api-h2            latest               f8049a029560   2 years ago      143MB
+openjdk                             8-jdk-alpine         a3562aa0b991   2 years ago      105MB
+tomcat                              8.0.51-jre8-alpine   fcc5ace83900   4 years ago      106MB
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app (master)
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app (master)
+$ docker run -p 4200:80 jbirla/todo-front-end:0.0.1-SNAPSHOT
+
+
+```
+
+![Browser](Images/Screenshot_31.png)
+
+---
+
+
