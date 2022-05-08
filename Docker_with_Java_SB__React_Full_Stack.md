@@ -341,7 +341,94 @@ COPY --from=backend-build ${DEPENDENCY}/BOOT-INF/classes /app
 ENTRYPOINT ["java","-cp","app:app/lib/*","com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication"]
 ```
 ---
-## What You Will Learn during this Step 07:
+## What You Will Learn during this Step 07 08:
 - Exploring Docker Compose
 
+```
+o-app> docker compose version
+Docker Compose version v2.4.1
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app>
+```
 
+---
+
+## What You Will Learn during this Step 09:
+
+- Running Full Stack Application with Docker Compose
+
+```yml
+version: '3.7'
+# ERROR - Removed subprocess.CalledProcessError: 
+# Command '['/usr/local/bin/docker-credential-desktop', 'get']' 
+# returned non-zero exit status 1
+
+# SOLUTION - Remove "credsStore":"desktop" from ~/.docker/config.json 
+# Original Content of ~/.docker/config.json
+# {"auths":{},"credsStore":"", "credsStore":"desktop","stackOrchestrator":"swarm"}
+# Update it to this
+# {"auths":{},"credsStore":"","stackOrchestrator":"swarm"}
+# OR
+# {"auths":{},"stackOrchestrator":"swarm"}
+services:
+  todo-frontend:
+    image: jbirla/todo-front-end:0.0.1-SNAPSHOT
+    #build:
+      #context: frontend/todo-app
+      #dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    restart: always
+    depends_on: # Start the depends_on first
+      - todo-api 
+    networks:
+      - fullstack-application-network
+
+  todo-api:
+    image: jbirla/rest-api-full-stack:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - fullstack-application-network
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  fullstack-application-network:
+```
+
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2 (master)
+$ docker-compose up
+
+```
+
+```
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2 (master)
+$ docker-compose up -d
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Created
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Created
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Starting
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Started
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Starting
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Started
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2 (master)
+$ docker-compose down
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Stopping
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Stopping
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Stopped
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Removing
+Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Removed
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Stopping
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Stopping
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Stopped
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Removing
+Container 04-spring-boot-react-full-stack-h2-todo-api-1  Removed
+Network 04-spring-boot-react-full-stack-h2_fullstack-application-network  Removing
+Network 04-spring-boot-react-full-stack-h2_fullstack-application-network  Removed
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2 (master)
+$
+
+```
