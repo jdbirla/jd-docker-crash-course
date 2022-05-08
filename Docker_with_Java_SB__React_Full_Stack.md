@@ -3,7 +3,7 @@
 ## What You Will Learn during this Step 01:
 - Exploring 04 Java Full Stack Spring Boot React App
 
-![Browser](react_00_architecture.png)
+![Browser](Images/react_00_architecture.png)
 
 To understand the application
 - https://www.springboottutorial.com/spring-boot-react-full-stack-crud-maven-application
