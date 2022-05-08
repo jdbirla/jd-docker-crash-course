@@ -114,3 +114,75 @@ $ docker run -p 8080:8080 jbirla/rest-api-full-stack:0.0.1-SNAPSHOT
 
 
 ```
+
+## What You Will Learn during this Step 04:
+- Creating Multi Stage Docker Build for React Frontend Code
+
+```
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app>  npm run build
+
+> todo-app@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  76.31 KB (+1.76 KB)  build\static\js\2.b9156a8c.chunk.js
+  3.26 KB (+1 B)       build\static\js\main.9f2df73b.chunk.js
+  764 B                build\static\js\runtime~main.c5541365.js
+  608 B (-17 B)        build\static\css\main.6e67fd60.chunk.css
+
+The project was built assuming it is hosted at the server root.
+You can control this with the homepage field in your package.json.
+For example, add this to build it for GitHub Pages:
+
+  "homepage" : "http://myname.github.io/myapp",
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://bit.ly/CRA-deploy
+
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app>
+
+
+```
+
+### using docker file
+
+* todo-app\Dockerfile
+```
+## Stage 1 - Lets build the "deployable package"
+FROM node:7.10 as frontend-build
+WORKDIR /fullstack/frontend
+
+# Step 1 - Download all package dependencies first.
+# We will redownload dependencies only when packages change.
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Step 2 - Copy all source and run build
+COPY . ./
+RUN npm run build
+
+## Stage 2 - Let's build a minimal image with the "deployable package"
+FROM nginx:1.12-alpine
+COPY --from=frontend-build /fullstack/frontend/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+```
+![Browser](Images/Screenshot_30.png)
+
+
+```docker
+C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker build .
+```
+
