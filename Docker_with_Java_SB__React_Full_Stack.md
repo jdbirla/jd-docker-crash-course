@@ -432,3 +432,131 @@ user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-co
 $
 
 ```
+---
+## What You Will Learn during this Step 10:
+
+
+- Using Docker Compose for Java Spring Boot Todo Web Application with MySQL
+
+```yml
+version: '3.7'
+# Removed subprocess.CalledProcessError: Command '['/usr/local/bin/docker-credential-desktop', 'get']' returned non-zero exit status 1
+# I had this:
+# cat ~/.docker/config.json
+# {"auths":{},"credsStore":"", "credsStore":"desktop","stackOrchestrator":"swarm"}
+# I updated to this:
+# {"auths":{},"credsStore":"","stackOrchestrator":"swarm"}
+services:
+  todo-web-application:
+    image: jbirla/todo-web-application-mysql:0.0.1-SNAPSHOT
+    #build:
+      #context: .
+      #dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on: # Start the depends_on first
+      - mysql 
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3306
+      RDS_DB_NAME: todos
+      RDS_USERNAME: todos-user
+      RDS_PASSWORD: dummytodos
+    networks:
+      - todo-web-application-network
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dummypassword 
+      MYSQL_USER: todos-user
+      MYSQL_PASSWORD: dummytodos
+      MYSQL_DATABASE: todos
+    volumes:
+      - mysql-database-data-volume:/var/lib/mysql
+    networks:
+      - todo-web-application-network  
+  
+# Volumes
+volumes:
+  mysql-database-data-volume:
+
+networks:
+  todo-web-application-network:
+```
+
+---
+## What You Will Learn during this Step 11:
+
+- Playing with docker-compose
+
+```
+$ docker-compose config
+name: 04-spring-boot-react-full-stack-h2
+services:
+  todo-api:
+    image: jbirla/rest-api-full-stack:0.0.1-SNAPSHOT
+    networks:
+      fullstack-application-network: null
+    ports:
+    - mode: ingress
+      target: 8080
+      published: "8080"
+      protocol: tcp
+    restart: always
+  todo-frontend:
+    depends_on:
+      todo-api:
+        condition: service_started
+    image: jbirla/todo-front-end:0.0.1-SNAPSHOT
+    networks:
+      fullstack-application-network: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "4200"
+      protocol: tcp
+    restart: always
+networks:
+  fullstack-application-network:
+    name: 04-spring-boot-react-full-stack-h2_fullstack-application-network
+
+o-app> docker-compose ps
+NAME                                                 COMMAND                  SERVICE             STATUS              PORTS
+04-spring-boot-react-full-stack-h2-todo-api-1        "java -cp app:app/li…"   todo-api            running             0.0.0.0:8080->8080/tcp
+04-spring-boot-react-full-stack-h2-todo-frontend-1   "nginx -g 'daemon of…"   todo-frontend       running             0.0.0.0:4200->80/tcp
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker-compose top
+04-spring-boot-react-full-stack-h2-todo-api-1
+UID    PID     PPID    C    STIME   TTY   TIME       CMD
+root   13309   13288   59   07:51   ?     00:00:28   java -cp app:app/lib/* com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication
+
+04-spring-boot-react-full-stack-h2-todo-frontend-1
+UID    PID     PPID    C    STIME   TTY   TIME       CMD
+root   13407   13386   0    07:51   ?     00:00:00   nginx: master process nginx -g daemon off;
+_apt   13458   13407   0    07:51   ?     00:00:00   nginx: worker process
+
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker-compose pause
+[+] Running 2/0
+ - Container 04-spring-boot-react-full-stack-h2-todo-api-1       P...                                                           0.0s
+ - Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Paused                                                         0.0s
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker-compose ps
+NAME                                                 COMMAND                  SERVICE             STATUS              PORTS
+04-spring-boot-react-full-stack-h2-todo-api-1        "java -cp app:app/li…"   todo-api            paused              0.0.0.0:8080->8080/tcp
+04-spring-boot-react-full-stack-h2-todo-frontend-1   "nginx -g 'daemon of…"   todo-frontend       paused              0.0.0.0:4200->80/tcp
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker-compose unpause
+[+] Running 2/0
+ - Container 04-spring-boot-react-full-stack-h2-todo-frontend-1  Unpaused                                                       0.0s
+ - Container 04-spring-boot-react-full-stack-h2-todo-api-1       U...                                                           0.0s
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> docker-compose ps
+NAME                                                 COMMAND                  SERVICE             STATUS              PORTS
+04-spring-boot-react-full-stack-h2-todo-api-1        "java -cp app:app/li…"   todo-api            running             0.0.0.0:8080->8080/tcp
+04-spring-boot-react-full-stack-h2-todo-frontend-1   "nginx -g 'daemon of…"   todo-frontend       running             0.0.0.0:4200->80/tcp
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app>
+
+```
+
+![Browser](Images/Screenshot_32.png)
