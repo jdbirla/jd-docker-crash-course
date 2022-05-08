@@ -16,7 +16,7 @@ To understand JWT and Spring Security Configuration
 
 - REST API - Import `restful-web-services` into Eclipse as Maven Project. Run `com.in28minutes.rest.webservices.restfulwebservices.RestfulWebServicesApplication` as a Java Application. Check Authentication and REST API Sections for executing REST APIs.
 - React Application - Import `frontend/todo-app` into Visual Studio Code. Run `npm install` followed by `npm start`
-- http://localhost:4200/ with credentials in28minutes/dummy
+- http://localhost:3000/ with credentials in28minutes/dummy
 
 > Look at  `Creating New Users` section for creating new users.
 
@@ -57,3 +57,48 @@ Example
 ![Browser](Images/Screenshot_27.png)
 
 ![Browser](Images/Screenshot_28.png)
+
+---
+## What You Will Learn during this Step 02:
+- Running React Frontend in Local
+* package.json update the below 
+* OLD
+```json
+"scripts": {
+    "start": "PORT=4200 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+```
+* New in windows
+
+```json
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+```
+
+- Running React Frontend in Local
+
+```
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app (master)
+$ pwd
+/c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app
+
+user@DESKTOP-AS2FQOH MINGW64 /c/D_Drive/DXC/Learning/Projects/jd-docker-crash-course/docker-crash-course-master/04-spring-boot-react-full-stack-h2/frontend/todo-app (master)
+$ npm install
+
+Run `npm audit` for details.
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\04-spring-boot-react-full-stack-h2\frontend\todo-app> npm start
+
+```
+
+![Browser](Images/Screenshot_29.png)
+
+---
+## What You Will Learn during this Step 03:
+- Containerizing Java REST API Backend
