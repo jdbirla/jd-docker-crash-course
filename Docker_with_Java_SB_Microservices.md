@@ -151,6 +151,80 @@ PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-m
 ```
 
 ---
+## section 10: Docker to integrate microservices with Zuul API Gateway
+
+## What You Will Learn during this Step 01:
+- Configure CES and CCS Microservices with Zuul API Gateway
+
+---
+
+## What You Will Learn during this Step 01:
+- Use Docker Compose to Run Microservices with Zuul
+
+```
+version: '3.7'
+
+services:
+
+  naming-server:
+    image: jbirla/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - currency-compose-network
+      
+  zuul-api-gateway:
+    image: jbirla/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
+    build:
+      context: netflix-zuul-api-gateway-server
+      dockerfile: Dockerfile
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    ports:
+      - "8765:8765"
+    restart: always
+    depends_on:
+      - naming-server
+    networks:
+      - currency-compose-network
+
+      
+  currency-exchange-service:
+    image: jbirla/currency-exchange-service:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - naming-server
+    networks:
+      - currency-compose-network
+
+  currency-conversion-service:
+    image: jbirla/currency-conversion-service:0.0.1-SNAPSHOT
+    ports:
+      - "8100:8100"
+    restart: always
+    environment:
+      CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
+    depends_on:
+      - currency-exchange-service
+      - naming-server
+    networks:
+      - currency-compose-network
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  currency-compose-network:
+
+```
+
+---
+
+## section 11: Distributed Tracing with Zipkin and RabbitMq
+
+## What You Will Learn during this Step 01:
+- Introduction to Zipkin and Update Microservices to Connect to Zipkin
 
 
 

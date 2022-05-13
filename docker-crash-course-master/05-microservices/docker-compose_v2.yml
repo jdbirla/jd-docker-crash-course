@@ -10,22 +10,6 @@ services:
     networks:
       - currency-compose-network
       
-  zuul-api-gateway:
-    image: jbirla/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
-    build:
-      context: netflix-zuul-api-gateway-server
-      dockerfile: Dockerfile
-    environment:
-      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
-    ports:
-      - "8765:8765"
-    restart: always
-    depends_on:
-      - naming-server
-    networks:
-      - currency-compose-network
-
-      
   currency-exchange-service:
     image: jbirla/currency-exchange-service:0.0.1-SNAPSHOT
     ports:
