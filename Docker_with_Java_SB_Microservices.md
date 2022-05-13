@@ -1,5 +1,7 @@
 # JD Java Spring Boot Getting started with CCS and CES Microservices on Docker
 
+## section 8: Docker container run for microservices
+ 
 ## What You Will Learn during this Step 01:
 -  Introduction to Microservices
 
@@ -33,6 +35,47 @@ docker run -p 8100:8100 --network=currency-network --name=currency-conversion-se
 
 
 ---
+## What You Will Learn during this Step 06:
+
+- Run CCS and CES Microservices using Docker Compose
+
+### C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\05-microservices\docker-compose.yml
+```
+version: '3.7'
+
+services:
+  currency-exchange-service:
+    image: jbirla/currency-exchange-service:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - currency-compose-network
+
+  currency-conversion-service:
+    image: jbirla/currency-conversion-service:0.0.1-SNAPSHOT
+    ports:
+      - "8100:8100"
+    restart: always
+    environment:
+      CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
+    depends_on:
+      - currency-exchange-service
+    networks:
+      - currency-compose-network
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  currency-compose-network:
+
+```
+```
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\05-microservices> docker-compose up
+```
+---
+## section 9: Docker to integrate microservices with Eureka namming server
+
+
 
 
 
