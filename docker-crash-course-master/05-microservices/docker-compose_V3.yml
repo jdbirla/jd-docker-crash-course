@@ -1,14 +1,6 @@
 version: '3.7'
-services:
 
-  rabbitmq:
-    image: rabbitmq:3.5.3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    restart: always
-    networks:
-      - currency-compose-network
+services:
 
   naming-server:
     image: jbirla/netflix-eureka-naming-server:0.0.1-SNAPSHOT
@@ -17,24 +9,12 @@ services:
     restart: always
     networks:
       - currency-compose-network
-
-  zipkin-server:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    environment:
-      STORAGE_TYPE: mem
-      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
-    ports:
-      - "9411:9411"
-    restart: always
-    depends_on:
-      - rabbitmq
-    networks:
-      - currency-compose-network
-
-
+      
   zuul-api-gateway:
     image: jbirla/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
+    build:
+      context: netflix-zuul-api-gateway-server
+      dockerfile: Dockerfile
     environment:
       RABBIT_URI: amqp://guest:guest@rabbitmq:5672
     ports:
@@ -42,22 +22,17 @@ services:
     restart: always
     depends_on:
       - naming-server
-      - rabbitmq
-      - zipkin-server
     networks:
       - currency-compose-network
 
+      
   currency-exchange-service:
     image: jbirla/currency-exchange-service:0.0.1-SNAPSHOT
-    environment:
-      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
     ports:
       - "8000:8000"
     restart: always
     depends_on:
       - naming-server
-      - rabbitmq
-      - zipkin-server
     networks:
       - currency-compose-network
 
@@ -67,13 +42,10 @@ services:
       - "8100:8100"
     restart: always
     environment:
-      #CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
-      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
     depends_on:
       - currency-exchange-service
       - naming-server
-      - rabbitmq
-      - zipkin-server
     networks:
       - currency-compose-network
   
