@@ -75,7 +75,82 @@ PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-m
 ---
 ## section 9: Docker to integrate microservices with Eureka namming server
 
+## What You Will Learn during this Step 01:
+-  Understanding the need for Service Registry
+---
 
+## What You Will Learn during this Step 02:
+-  Create Docker Images for Eureka Naming Server
+
+* /07-netflix-eureka-naming-server/pom.xml adding below plugin
+```
+	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
+```
+
+### C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\05-microservices\docker-compose.yml
+```
+version: '3.7'
+
+services:
+
+  naming-server:
+    image: jbirla/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - currency-compose-network
+      
+  currency-exchange-service:
+    image: jbirla/currency-exchange-service:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - naming-server
+    networks:
+      - currency-compose-network
+
+  currency-conversion-service:
+    image: jbirla/currency-conversion-service:0.0.1-SNAPSHOT
+    ports:
+      - "8100:8100"
+    restart: always
+    environment:
+      CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
+    depends_on:
+      - currency-exchange-service
+      - naming-server
+    networks:
+      - currency-compose-network
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  currency-compose-network:
+```
+---
+
+## What You Will Learn during this Step 03:
+-  Configure and Run CES and CCS Microservices with Eureka Service
+
+![Browser](Images/Screenshot_35.png)
+
+```
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\05-microservices> docker-compose up -d
+Creating 05-microservices_naming-server_1 ... done
+Recreating 05-microservices_currency-exchange-service_1 ... done
+Recreating 05-microservices_currency-conversion-service_1 ... done
+PS C:\D_Drive\DXC\Learning\Projects\jd-docker-crash-course\docker-crash-course-master\05-microservices>
+```
+
+---
 
 
 

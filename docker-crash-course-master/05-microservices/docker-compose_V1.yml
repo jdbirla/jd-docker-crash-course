@@ -1,22 +1,11 @@
 version: '3.7'
 
 services:
-
-  naming-server:
-    image: jbirla/netflix-eureka-naming-server:0.0.1-SNAPSHOT
-    ports:
-      - "8761:8761"
-    restart: always
-    networks:
-      - currency-compose-network
-      
   currency-exchange-service:
     image: jbirla/currency-exchange-service:0.0.1-SNAPSHOT
     ports:
       - "8000:8000"
     restart: always
-    depends_on:
-      - naming-server
     networks:
       - currency-compose-network
 
@@ -29,7 +18,6 @@ services:
       CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
     depends_on:
       - currency-exchange-service
-      - naming-server
     networks:
       - currency-compose-network
   
