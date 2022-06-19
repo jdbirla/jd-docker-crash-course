@@ -59,5 +59,18 @@ CMD ["catalina.sh","run"]
 ```
 ## Docker With Java Spring Boot Todo WEB APP using MySQL
   1. Intruducing ``` Create docker image for Web using MySQL ``` [Solution for Problem:  Docker image for Spring boot web app using MySQL]
-  2. 
+### MySQL
+#### Launching MySQL using Docker
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --     publish 3306:3306 mysql:5.7
+```
 
+#### Using Custom Network
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --       publish 3306:3306 --network=web-application-mysql-network mysql:5.7
+```
+
+#### Using a Volume
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --     publish 3306:3306 --network=web-application-mysql-network --volume mysql-database-volume:/var/lib/mysql  mysql:5.7
+```
