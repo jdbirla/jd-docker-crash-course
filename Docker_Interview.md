@@ -47,4 +47,15 @@ ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
  ### Using Fabric8 docker maven plugin to create docker images
   6. Intruducing ``` Fabric8 docker maven plugin ``` [Solution for Problem:  This is a Maven plugin for managing Docker images and containers]
 
+----
+## Docker With Java Spring Boot Todo WEB APP
+  1. Intruducing ``` Create docker image for Web ``` [Solution for Problem:  Docker image for Spring boot web app]
+```
+FROM tomcat:8.0.51-jre8-alpine
+EXPOSE 8080
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+CMD ["catalina.sh","run"]
+```
+
 
