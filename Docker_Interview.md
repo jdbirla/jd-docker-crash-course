@@ -44,4 +44,7 @@ ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
  ### Using JIB plugin to create docker images
   5. Intruducing ``` JIB Plugin ``` [Solution for Problem: Jib builds containers without using a Dockerfile or requiring a Docker installation. You can use Jib in the Jib plugins for Maven ]
 
+ ### Using Fabric8 docker maven plugin to create docker images
+  6. Intruducing ``` Fabric8 docker maven plugin ``` [Solution for Problem:  This is a Maven plugin for managing Docker images and containers]
+
 
