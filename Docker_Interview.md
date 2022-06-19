@@ -79,7 +79,7 @@ docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=tod
  #### Launching MySQL and Web App using Custom Network
  
 
- 4. Intruducing ``` Launching Web App using MYSQL using custom network ``` [Solution for Problem:  ]
+ 4. Intruducing ``` Launching Web App using MYSQL using custom network ``` [Solution for Problem: We can't use host network in windows and mac as docker alway run in these OS as docker desktop while network host can run in unix in below link not required]
  * MySQL
 ```
 docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 --network=web-application-mysql-network mysql:5.7
