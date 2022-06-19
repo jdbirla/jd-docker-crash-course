@@ -30,5 +30,11 @@ EXPOSE 8080
 ADD target/hello-world-rest-api.jar hello-world-rest-api.jar
 ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
   ```
+ ### Using Docker Spotify Plugin to create docker images
+  3. Intruducing ``` Spotify Maven Plugin ``` [Solution for Problem: It integrates with maven and using maven clean build]
+  ```
+  
+  ```
+
   
 
