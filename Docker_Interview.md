@@ -32,9 +32,16 @@ ENTRYPOINT ["sh", "-c", "java -jar /hello-world-rest-api.jar"]
   ```
  ### Using Docker Spotify Plugin to create docker images
   3. Intruducing ``` Spotify Maven Plugin ``` [Solution for Problem: It integrates with maven and using maven clean build]
-  ```
-  
-  ```
 
-  
+ ### Generic Reusable Dockerfile
+  4. Intruducing ``` Generic Docker file ``` [Solution for Problem: Resuable docker file]
+  ```
+  FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+ADD target/*.jar app.jar
+ENTRYPOINT ["sh", "-c", "java -jar /app.jar"]
+```
+ ### Using JIB plugin to create docker images
+  5. Intruducing ``` JIB Plugin ``` [Solution for Problem: Jib builds containers without using a Dockerfile or requiring a Docker installation. You can use Jib in the Jib plugins for Maven ]
+
 
