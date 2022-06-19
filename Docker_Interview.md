@@ -58,19 +58,34 @@ COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
 CMD ["catalina.sh","run"]
 ```
 ## Docker With Java Spring Boot Todo WEB APP using MySQL
+
+### MySQL + Web App
+
   1. Intruducing ``` Create docker image for Web using MySQL ``` [Solution for Problem:  Docker image for Spring boot web app using MySQL]
-### MySQL
-#### Launching MySQL using Docker
+
+#### Launching MySQL and Web App using Link in bridge network
+
+2. Intruducing ``` Launching MySQL using Docker ``` [Solution for Problem:  Docker image running for MYSQL]
+  
 ```
 docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --     publish 3306:3306 mysql:5.7
 ```
 
-#### Using Custom Network
+ 3. Intruducing ``` Launching Web App using link with MySQL (deprecated) ``` [Solution for Problem:  Two cotainer can't communicate becasue they use default bridge network which used default setting we need to link both]
+ 
+ ```
+ docker container run -p 8080:8080 --link=mysql -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
+ ```
+ #### Launching MySQL and Web App using Custom Network
+ 
+
+ 4. Intruducing ``` Launching Web App using MYSQL using custom network ``` [Solution for Problem:  ]
+ * MySQL
 ```
-docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --       publish 3306:3306 --network=web-application-mysql-network mysql:5.7
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 --network=web-application-mysql-network mysql:5.7
+```
+* Web App 
+```
+docker container run -p 8080:8080 --network=web-application-mysql-network -e RDS_HOSTNAME=mysql  in28min/todo-web-application-mysql:0.0.1-SNAPSHOT
 ```
 
-#### Using a Volume
-```
-docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --     publish 3306:3306 --network=web-application-mysql-network --volume mysql-database-volume:/var/lib/mysql  mysql:5.7
-```
